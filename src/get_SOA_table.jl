@@ -6,11 +6,11 @@ Given the id or name of a `mort.SOA.org` table, grab it and return it as a `Mort
 
 !!! Remember that not all tables have been tested to work.
 """
-function get_SOA_table(id::Int)
+function get_SOA_table(id::Int)::MortalityTable
     readXTbML(joinpath(artifact"mort.soa.org","t$id.xml"))
 end
 
-function get_SOA_table(table_name::String;source_map=table_source_map)
+function get_SOA_table(table_name::String;source_map=table_source_map)::MortalityTable
     entry = findfirst(x-> x.name == table_name, source_map)
     if entry === nothing
         search_method = StringDistances.Partial(StringDistances.Levenshtein())
